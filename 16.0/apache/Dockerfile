@@ -141,8 +141,7 @@ RUN set -ex; \
     rm -rf /var/lib/apt/lists/*
 
 COPY *.sh upgrade.exclude /
-WORKDIR config
-COPY *.php /usr/src/nextcloud/config/
+COPY config /usr/src/nextcloud/
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
