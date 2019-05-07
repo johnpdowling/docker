@@ -1,6 +1,8 @@
 # DO NOT EDIT: created by update.sh from Dockerfile-debian.template
 FROM php:7.3-apache-stretch
 
+WORKDIR 16.0/apache/
+
 # entrypoint.sh and cron.sh dependencies
 RUN set -ex; \
     \
@@ -141,7 +143,7 @@ RUN set -ex; \
     rm -rf /var/lib/apt/lists/*
 
 COPY *.sh upgrade.exclude /
-COPY config /usr/src/nextcloud/
+COPY config/* /usr/src/nextcloud/config/
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
