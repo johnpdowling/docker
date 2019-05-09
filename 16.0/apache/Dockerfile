@@ -112,6 +112,7 @@ RUN a2enmod rewrite remoteip ;\
     a2enconf remoteip
 
 ENV NEXTCLOUD_VERSION 16.0.0
+ENV NEXTCLOUD_OVERWRITEPROTOCOL https
 
 RUN set -ex; \
     fetchDeps=" \
