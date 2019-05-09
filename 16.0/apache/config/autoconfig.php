@@ -21,7 +21,12 @@ if (getenv('SQLITE_DATABASE')) {
     $AUTOCONFIG["dbhost"] = getenv('POSTGRES_HOST');
     $autoconfig_enabled = true;
 }
-
+if (getenv('NEXTCLOUD_OVERWRITEPROTOCOL')) {
+    $AUTOCONFIG["overwriteprotocol"] = getenv('NEXTCLOUD_OVERWRITEPROTOCOL');
+}
+if (getenv('NEXTCLOUD_OVERWRITECLIURL')) {
+    $AUTOCONFIG["overwrite.cli.url"] = getenv('NEXTCLOUD_OVERWRITECLIURL');
+}
 if ($autoconfig_enabled) {
     $AUTOCONFIG["dbtableprefix"] = getenv('NEXTCLOUD_TABLE_PREFIX') ?: "";
 
