@@ -122,6 +122,14 @@ if expr "$1" : "apache" 1>/dev/null || [ "$1" = "php-fpm" ] || [ "${NEXTCLOUD_UP
                             NC_TRUSTED_DOMAIN_IDX=$(($NC_TRUSTED_DOMAIN_IDX+1))
                         done
                     fi
+                    if [ -n "${NEXTCLOUD_OVERWRITEPROTOCOL+x}" ]; then
+                        echo "setting overwriteprotocol…"
+                        run_as "php /var/www/html/occ config:system:set overwriteprotocol --value=$NEXTCLOUD_OVERWRITEPROTOCOL"
+                    fi
+                    if [ -n "${NEXTCLOUD_OVERWRITECLIURL+x}" ]; then
+                        echo "setting overwrite.cli.url…"
+                        run_as "php /var/www/html/occ config:system:set overwrite.cli.url --value=$NEXTCLOUD_OVERWRITECLIURL"
+                    fi
                 else
                     echo "running web-based installer on first connect!"
                 fi
@@ -136,14 +144,6 @@ if expr "$1" : "apache" 1>/dev/null || [ "$1" = "php-fpm" ] || [ "${NEXTCLOUD_UP
             rm -f /tmp/list_before /tmp/list_after
 
         fi
-    fi
-    if [ -n "${NEXTCLOUD_OVERWRITEPROTOCOL+x}" ]; then
-        echo "setting overwriteprotocol…"
-        run_as "php /var/www/html/occ config:system:set overwriteprotocol --value=$NEXTCLOUD_OVERWRITEPROTOCOL"
-    fi
-    if [ -n "${NEXTCLOUD_OVERWRITECLIURL+x}" ]; then
-        echo "setting overwrite.cli.url…"
-        run_as "php /var/www/html/occ config:system:set overwrite.cli.url --value=$NEXTCLOUD_OVERWRITECLIURL"
     fi
 fi
 
